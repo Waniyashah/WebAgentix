@@ -80,10 +80,6 @@ function ServicesCarousel() {
       title: "Graphic Design",
       desc: "Creative visual designs, branding, and user interface aesthetics that captivate and engage.",
     },
-    {
-      title: "Digital Marketing",
-      desc: "Strategic campaigns, SEO optimization, and social media management to grow your reach.",
-    },
   ]
 
   const nextSlide = () => {
@@ -94,22 +90,14 @@ function ServicesCarousel() {
     setCurrentIndex((prev) => (prev - 1 + services.length) % services.length)
   }
 
-  const getVisibleServices = () => {
-    const visible = []
-    for (let i = 0; i < 3; i++) {
-      const index = (currentIndex + i) % services.length
-      visible.push(services[index])
-    }
-    return visible
-  }
-
   return (
     <section aria-labelledby="capabilities" className="space-y-6" data-aos="fade-up">
-      <div className="flex items-center justify-between">
-        <h2 id="capabilities" className="text-xl font-semibold">
+      {/* Header - Mobile Responsive */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <h2 id="capabilities" className="text-xl font-semibold text-center sm:text-left">
           What we do
         </h2>
-        <div className="flex gap-2">
+        <div className="flex gap-2 justify-center sm:justify-end">
           <button
             onClick={prevSlide}
             className="flex h-10 w-10 items-center justify-center rounded-full border bg-background hover:bg-accent hover:text-accent-foreground transition-colors animate-float-slow"
@@ -127,27 +115,76 @@ function ServicesCarousel() {
         </div>
       </div>
       
-      <div className="relative overflow-hidden">
-        <div 
-          className="flex gap-4 transition-transform duration-300 ease-in-out"
-          style={{ transform: `translateX(-${currentIndex * (100/3)}%)` }}
-        >
-          {services.map((item, index) => (
-            <div 
-              key={`${item.title}-${index}`} 
-              className="card-hover rounded-lg border p-5 min-w-0 flex-shrink-0"
-              style={{ width: 'calc(33.333% - 0.667rem)' }}
-              data-aos="fade-up"
-              data-aos-delay={`${index * 100}`}
-            >
-              <h3 className="font-medium">{item.title}</h3>
-              <p className="mt-2 text-sm text-foreground/80">{item.desc}</p>
-            </div>
-          ))}
+      {/* Mobile View - 1 card at a time */}
+      <div className="block sm:hidden">
+        <div className="relative overflow-hidden">
+          <div 
+            className="flex transition-transform duration-300 ease-in-out"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {services.map((item, index) => (
+              <div 
+                key={`${item.title}-mobile-${index}`} 
+                className="card-hover rounded-lg border p-6 min-w-0 flex-shrink-0 w-full"
+                data-aos="fade-up"
+                data-aos-delay={`${index * 100}`}
+              >
+                <h3 className="font-medium text-lg mb-3">{item.title}</h3>
+                <p className="text-sm text-foreground/80 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Tablet View - 2 cards at a time */}
+      <div className="hidden sm:block lg:hidden">
+        <div className="relative overflow-hidden">
+          <div 
+            className="flex gap-4 transition-transform duration-300 ease-in-out"
+            style={{ transform: `translateX(-${currentIndex * 50}%)` }}
+          >
+            {services.map((item, index) => (
+              <div 
+                key={`${item.title}-tablet-${index}`} 
+                className="card-hover rounded-lg border p-5 min-w-0 flex-shrink-0"
+                style={{ width: 'calc(50% - 0.5rem)' }}
+                data-aos="fade-up"
+                data-aos-delay={`${index * 100}`}
+              >
+                <h3 className="font-medium">{item.title}</h3>
+                <p className="mt-2 text-sm text-foreground/80">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop View - 3 cards at a time */}
+      <div className="hidden lg:block">
+        <div className="relative overflow-hidden">
+          <div 
+            className="flex gap-4 transition-transform duration-300 ease-in-out"
+            style={{ transform: `translateX(-${currentIndex * (100/3)}%)` }}
+          >
+            {services.map((item, index) => (
+              <div 
+                key={`${item.title}-desktop-${index}`} 
+                className="card-hover rounded-lg border p-5 min-w-0 flex-shrink-0"
+                style={{ width: 'calc(33.333% - 0.667rem)' }}
+                data-aos="fade-up"
+                data-aos-delay={`${index * 100}`}
+              >
+                <h3 className="font-medium">{item.title}</h3>
+                <p className="mt-2 text-sm text-foreground/80">{item.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       
-      <div className="flex justify-center gap-2">
+      {/* Dots Indicator - Mobile Responsive */}
+      <div className="flex justify-center gap-2 pt-2">
         {services.map((_, index) => (
           <button
             key={index}
