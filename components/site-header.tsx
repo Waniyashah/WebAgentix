@@ -86,15 +86,7 @@ export function SiteHeader() {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link
-                  href="/team"
-                  onClick={() => setOpen(false)}
-                  className="block rounded-md px-3 py-2 text-sm text-foreground/80 hover:bg-accent hover:text-accent-foreground"
-                >
-                  Team
-                </Link>
-              </li>
+              
               <li>
                 <Link
                   href="/skills"
